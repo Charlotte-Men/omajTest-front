@@ -52,7 +52,7 @@
 }
 .cardImage {
   height: 25vh;
-  width: 20vh;
+  width: 90%;
   object-fit: cover;
   margin: 1vw;
 }

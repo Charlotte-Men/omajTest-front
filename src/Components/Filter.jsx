@@ -1,11 +1,12 @@
 import React, {useState, useEffect, useContext } from "react";
 import axios from 'axios';
-// import ProductsContext from "../Context/ProductsContext";
+import AllProductsContext from "../Context/AllProductsContext";
+import ProductsListContext from '../Context/ProductsListContext';
 import styles from './Filter.module.css';
 
 export default function Filter() {
-  // const { products, setProducts } = useContext(ProductsContext);
-  const [productList, setProductList] = useState()
+  const { allProducts } = useContext(AllProductsContext);
+  const { productsList, setProductsList } = useContext(ProductsListContext);
   const [brand, setBrand] = useState();
   const [size, setSize] = useState();
   const [color, setColor] = useState();
@@ -22,20 +23,15 @@ export default function Filter() {
     const result = await axios.get('http://localhost:5000/products/color');
     setColor(result.data);
   };
-  const fetchProducts = async () => {
-    const result = await axios.get('http://localhost:5000/products/');
-    setProductList(result.data);
-  };
-
+  
   useEffect(() => {
-    fetchProducts();
     fetchSizes();
     fetchBrands();
     fetchColors();
   }, []);
 
   const handleAllProducts = () => {
-    fetchProducts();
+    setProductsList(allProducts);
   }
 
   return (
@@ -74,17 +70,18 @@ export default function Filter() {
       </select>
     </div>
     <div className={styles.CardContainer}>
-    {productList &&
-    productList.map((pdt) => {
+    {productsList && productsList.length !== 0 ?
+    productsList.map((pdt) => {
       return (
         <div key={pdt.product_id} className={styles.productsCard} >
           <img src={pdt.product_img} alt={pdt.name} className={styles.cardImage} />
           <h2>{pdt.product_name}</h2>
           <p>{Number.parseFloat(pdt.product_price).toFixed(2)}€</p>
         </div>
-      );
-    })}
-    {/* <h3>Oops ! There are no products in this category yet</h3>) */}
+        );
+      }) :
+      <h3>Oops ! There are no products in this category yet</h3>
+    }
     </div>
   </div>
 )};

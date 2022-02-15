@@ -4,17 +4,17 @@ import { BrowserRouter } from 'react-router-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { CategoryContextProvider } from './Context/CategoryContext';
-import { ProductsContextProvider } from './Context/ProductsContext';
+import { ProductsListContextProvider } from './Context/ProductsListContext';
+import { AllProductsContextProvider } from './Context/AllProductsContext';
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-      <CategoryContextProvider>
-        <ProductsContextProvider>
+      <ProductsListContextProvider>
+        <AllProductsContextProvider>
           <App />
-        </ProductsContextProvider>
-      </CategoryContextProvider>
+        </AllProductsContextProvider>
+      </ProductsListContextProvider>
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')

@@ -2,35 +2,38 @@ import React, { useContext, useEffect, useState }from "react";
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-import CategoryContext from "../Context/CategoryContext";
-import ProductsContext from "../Context/ProductsContext";
+import AllProductsContext from "../Context/AllProductsContext";
+import ProductsListContext from '../Context/ProductsListContext';
 
 import styles from './Categories.module.css';
 
 export default function Categories() {
   let navigate = useNavigate();
-  const { setCategory } = useContext(CategoryContext);
-  const { products, setProducts } = useContext(ProductsContext);
+  const { setProductsList } = useContext(ProductsListContext);
+  const { setAllProducts } = useContext(AllProductsContext);
   const [categories, setCategories] = useState([])
 
   const fetchCategories = async () => {
     const result = await axios.get('http://localhost:5000/categories/');
     setCategories(result.data);
   };
+  const fetchAllProducts = async () => {
+    const result = await axios.get('http://localhost:5000/products/');
+    setAllProducts(result.data);
+  };
 
   useEffect(() => {
     fetchCategories();
+    fetchAllProducts();
   }, []);
 
-  const fetchProducts = async (id) => {
+  const fetchCatProducts = async (id) => {
     const result = await axios.get(`http://localhost:5000/products/category/${id}`);
-    setProducts(result.data);
-    console.log(products);
+    await setProductsList(result.data);
   };
 
   const handleSelection = (id) => {
-    fetchProducts(id)
-    setCategory(id);
+    fetchCatProducts(id)
     navigate('/products')
   }
 
