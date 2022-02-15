@@ -3,12 +3,14 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 import CategoryContext from "../Context/CategoryContext";
+import ProductsContext from "../Context/ProductsContext";
 
 import styles from './Categories.module.css';
 
 export default function Categories() {
   let navigate = useNavigate();
   const { setCategory } = useContext(CategoryContext);
+  const { products, setProducts } = useContext(ProductsContext);
   const [categories, setCategories] = useState([])
 
   const fetchCategories = async () => {
@@ -20,9 +22,16 @@ export default function Categories() {
     fetchCategories();
   }, []);
 
+  const fetchProducts = async (id) => {
+    const result = await axios.get(`http://localhost:5000/products/category/${id}`);
+    setProducts(result.data);
+    console.log(products);
+  };
+
   const handleSelection = (id) => {
+    fetchProducts(id)
     setCategory(id);
-    navigate('/')
+    navigate('/products')
   }
 
   return (

@@ -12,7 +12,18 @@
   top: 0;
   left: 0;
 }
-
+.headerContainer button {
+  position: absolute;
+  top: 5vh;
+  left: 5vh;
+  text-align: center;
+  height: 10vh;
+  width: 10vh;
+  background-color: #6b6f5f;
+  color: #fcf8e4;
+  font-size: large;
+  cursor: pointer;
+}
 .headerContainer h1 {
   text-align: center;
 }
