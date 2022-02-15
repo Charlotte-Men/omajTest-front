@@ -34,6 +34,10 @@ export default function Filter() {
     setProductsList(allProducts);
   }
 
+  // const handleSelect = () => {
+  //   setProductsList(productsList.filter((field, value) => `product.${field}_id` === value))
+  // }
+
   return (
   <div className={styles.FilterContainer}>
     <div className={styles.Filters}>
@@ -42,7 +46,7 @@ export default function Filter() {
         <option value="">Choose a brand</option>
         {brand && brand.map((brand) => {
       return (
-        <option key={brand.brand_id} value={brand.brand_name}>
+        <option key={brand.brand_id} value={brand.brand_id}>
           {brand.brand_name}
         </option>
       );
@@ -52,7 +56,7 @@ export default function Filter() {
         <option value="">Choose a size</option>
         {size && size.map((size) => {
       return (
-        <option key={size.size_id} value={size.size_value}>
+        <option key={size.size_id} value={size.size_id}>
           {size.size_value}
         </option>
       );
@@ -62,7 +66,7 @@ export default function Filter() {
         <option value="">Choose a color</option>
         {color && color.map((color) => {
       return (
-        <option key={color.color_id} value={color.color_name}>
+        <option key={color.color_id} value={color.color_id}>
           {color.color_name}
         </option>
       );
