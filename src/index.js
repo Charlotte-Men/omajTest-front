@@ -5,15 +5,15 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { ProductsListContextProvider } from './Context/ProductsListContext';
-import { AllProductsContextProvider } from './Context/AllProductsContext';
+import { CategoriesContextProvider } from './Context/CategoriesContext';
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
       <ProductsListContextProvider>
-        <AllProductsContextProvider>
+        <CategoriesContextProvider>
           <App />
-        </AllProductsContextProvider>
+        </CategoriesContextProvider>
       </ProductsListContextProvider>
     </BrowserRouter>
   </React.StrictMode>,

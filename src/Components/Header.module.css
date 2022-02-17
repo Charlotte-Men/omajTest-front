@@ -21,6 +21,7 @@
   width: 10vh;
   background-color: #6b6f5f;
   color: #fcf8e4;
+  border-radius: 5px;
   font-size: large;
   cursor: pointer;
 }

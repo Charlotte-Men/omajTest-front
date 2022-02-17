@@ -1,0 +1,36 @@
+.categoriesContainer {
+  background-color: #fcf8e4;
+  color: #6b6f5f;
+  height: 80vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  position: absolute;
+  top: 20vh;
+  left: 0;
+}
+.mainCard{
+  background-color: #b6b196;
+  height: 20vh;
+  width: 20vw;
+  margin: 2vh;
+  border: #a9ad9d solid 1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: rgb(0 0 0 / 25%) 0px 4px 4px 0px;
+  cursor: pointer;
+}
+.categoriesCard {
+  height: 20vh;
+  width: 20vw;
+  margin: 2vh;
+  border: #a9ad9d solid 1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: rgb(0 0 0 / 25%) 0px 4px 4px 0px;
+  cursor: pointer;
+}

@@ -1,50 +1,44 @@
-import React, { useContext, useEffect, useState }from "react";
+import React, { useContext } from "react";
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 
-import AllProductsContext from "../Context/AllProductsContext";
+import CategoriesContext from "../Context/CategoriesContext";
 import ProductsListContext from '../Context/ProductsListContext';
 
 import styles from './Categories.module.css';
 
-export default function Categories() {
-  let navigate = useNavigate();
-  const { setProductsList } = useContext(ProductsListContext);
-  const { setAllProducts } = useContext(AllProductsContext);
-  const [categories, setCategories] = useState([])
+export default function Filter() {
+  const { categories } = useContext(CategoriesContext);
+  const { productsList, setProductsList } = useContext(ProductsListContext);
 
-  const fetchCategories = async () => {
-    const result = await axios.get('http://localhost:5000/categories/');
-    setCategories(result.data);
-  };
-  const fetchAllProducts = async () => {
-    const result = await axios.get('http://localhost:5000/products/');
-    setAllProducts(result.data);
-  };
-
-  useEffect(() => {
-    fetchCategories();
-    fetchAllProducts();
-  }, []);
-
-  const fetchCatProducts = async (id) => {
-    const result = await axios.get(`http://localhost:5000/products/category/${id}`);
+  const handleSelection = async (id) => {
+    const result = await axios.get(`http://localhost:5000/products?category_id=${id}`);
     await setProductsList(result.data);
   };
-
-  const handleSelection = (id) => {
-    fetchCatProducts(id)
-    navigate('/products')
-  }
-
+  
   return (
-  <div className={styles.categoriesContainer}>
-    {categories.map((cat) => {
+  <div className={styles.FilterContainer}>
+    <div className={styles.Filters}>
+      {categories.map((cat) => {
       return (
-        <div key={cat.category_id} className={styles.categoriesCard} onClick={() => handleSelection(cat.category_id)}>
-          <h2>{cat.category_name}</h2>
-        </div>
+        <button key={cat.category_id} className={styles.categoriesButton} onClick={() => handleSelection(cat.category_id)}>
+          {cat.category_name}
+        </button>
       );
     })}
+    </div>
+    <div className={styles.CardContainer}>
+    {productsList && productsList.length !== 0 ?
+    productsList.map((pdt) => {
+      return (
+        <div key={pdt.product_id} className={styles.productsCard} >
+          <img src={pdt.product_img} alt={pdt.name} className={styles.cardImage} />
+          <h2>{pdt.product_name}</h2>
+          <p>{Number.parseFloat(pdt.product_price).toFixed(2)}€</p>
+        </div>
+        );
+      }) :
+      <h3>Oops ! There are no products in this category yet</h3>
+    }
+    </div>
   </div>
 )};

@@ -2,8 +2,9 @@ import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 
 import Header from './Components/Header';
+import Home from './Components/Home';
 import Categories from './Components/Categories';
-import Filter from './Components/Filter';
+import Products from './Components/Products'
 
 import './App.css';
 
@@ -12,8 +13,9 @@ function App() {
     <main className="App">
       <Header />
       <Routes>
-        <Route exact path="/" element={<Categories />} />
-        <Route path="/products" element={<Filter />} />
+        <Route exact path="/" element={<Home />} />
+        <Route path="/products" element={<Products />} />
+        <Route path="/categories" element={<Categories />} />
       </Routes>
     </main>
   );
