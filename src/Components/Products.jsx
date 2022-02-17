@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from "react";
+import { createSearchParams, useSearchParams } from "react-router-dom";
 import axios from 'axios';
 import styles from './Products.module.css';
 
 export default function Filter() {
+  let [searchParams, setSearchParams] = useSearchParams();
   const [productsList, setProductsList] = useState();
   const [brand, setBrand] = useState();
   const [size, setSize] = useState();
   const [color, setColor] = useState();
   const [category, setCategory] = useState();
-  const [criterias, setCriterias] = useState([]);
+  // const [criterias, setCriterias] = useState([]);
 
   const fetchAllProducts = async () => {
     const result = await axios.get('http://localhost:5000/products/');
@@ -40,24 +42,25 @@ export default function Filter() {
   }, []);
 
   const fetchSelectedProducts = async (crit) => {
-    const result = await axios.get(`http://localhost:5000/products?category_id=${crit}`);
+    const result = await axios.get(`http://localhost:5000/products?${createSearchParams(crit)}`);
     setProductsList(result.data);
   };
 
-  const handleSelection = (e) => {
-    e.preventDefault();
-    fetchSelectedProducts(criterias)
-  }
+  useEffect(() => {
+    fetchSelectedProducts(searchParams);
+  }, [searchParams]);
 
-  const handleCatChange = (e) => {
-    setCriterias(e.target.value);
-    console.log(criterias)
-  };
+  const handleSelection = (search) => {
+    setSearchParams(search);
+  }
 
   return (
   <div className={styles.FilterContainer}>
-    <form className={styles.Filters} onSubmit={(e) => handleSelection(e)}>
-      <select name="category" onChange={(e) => handleCatChange(e)}>
+    <div className={styles.Filters} >
+      <select 
+      name="category" 
+      onChange={(e) => handleSelection({category_id : e.target.value})}
+      >
         <option value="">Choose a category</option>
         {category && category.map((category) => {
       return (
@@ -67,7 +70,10 @@ export default function Filter() {
         );
       })}
     </select>
-    <select name="brand">
+    <select 
+    name="brand"
+    onChange={(e) => handleSelection({brand_id : e.target.value})}
+    >
         <option value="">Choose a brand</option>
         {brand && brand.map((brand) => {
       return (
@@ -77,7 +83,10 @@ export default function Filter() {
       );
     })}
       </select>
-      <select name="size">
+      <select 
+      name="size"
+      onChange={(e) => handleSelection({size_id : e.target.value})}
+      >
         <option value="">Choose a size</option>
         {size && size.map((size) => {
       return (
@@ -87,7 +96,10 @@ export default function Filter() {
       );
     })}
       </select>
-      <select name="color">
+      <select 
+      name="color"
+      onChange={(e) => handleSelection({color_id : e.target.value})}
+      >
         <option value="">Choose a color</option>
         {color && color.map((color) => {
       return (
@@ -97,8 +109,7 @@ export default function Filter() {
       );
     })}
       </select>
-      <input type="submit" value="Search"></input>
-    </form>
+    </div>
     <div className={styles.CardContainer} >
       <div className={styles.allProductsCard} onClick={() => fetchAllProducts()}>
           <h2>See all clothes</h2>
