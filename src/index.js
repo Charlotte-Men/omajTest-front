@@ -4,8 +4,8 @@ import { BrowserRouter } from 'react-router-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { ProductsListContextProvider } from './Context/ProductsListContext';
 import { CategoriesContextProvider } from './Context/CategoriesContext';
+import { ProductsListContextProvider } from './Context/ProductsListContext';
 
 ReactDOM.render(
   <React.StrictMode>

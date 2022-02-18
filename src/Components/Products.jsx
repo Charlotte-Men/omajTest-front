@@ -3,14 +3,13 @@ import { createSearchParams, useSearchParams } from "react-router-dom";
 import axios from 'axios';
 import styles from './Products.module.css';
 
-export default function Filter() {
+export default function Products() {
   let [searchParams, setSearchParams] = useSearchParams();
   const [productsList, setProductsList] = useState();
   const [brand, setBrand] = useState();
   const [size, setSize] = useState();
   const [color, setColor] = useState();
   const [category, setCategory] = useState();
-  // const [criterias, setCriterias] = useState([]);
 
   const fetchAllProducts = async () => {
     const result = await axios.get('http://localhost:5000/products/');

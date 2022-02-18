@@ -6,7 +6,7 @@ import ProductsListContext from '../Context/ProductsListContext';
 
 import styles from './Categories.module.css';
 
-export default function Filter() {
+export default function Categories() {
   const { categories } = useContext(CategoriesContext);
   const { productsList, setProductsList } = useContext(ProductsListContext);
 
