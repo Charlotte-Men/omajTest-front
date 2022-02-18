@@ -1,0 +1,30 @@
+.headerContainer {
+  background-color: #fcf8e4;
+  color: #6b6f5f;
+  height: 20vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: rgb(0 0 0 / 25%) 0px 4px 4px 0px;
+  z-index: 100;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.headerContainer button {
+  position: absolute;
+  top: 5vh;
+  left: 5vh;
+  text-align: center;
+  height: 10vh;
+  width: 10vh;
+  background-color: #6b6f5f;
+  color: #fcf8e4;
+  border-radius: 5px;
+  font-size: large;
+  cursor: pointer;
+}
+.headerContainer h1 {
+  text-align: center;
+}
